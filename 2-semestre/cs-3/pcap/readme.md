@@ -184,7 +184,6 @@ Este projeto engloba de forma prática os pilares da disciplina de Pensamento Co
 
 * **Automação:** O sistema avança o faturamento e aplica condições climáticas na rede em segundo plano.
 
-* **Programação Orientada a Objetos (POO):** O código GUI foi encapsulado, mantendo o controle de estados limpo e coeso.
 ---
 
 ## ⚙️ Estrutura do Repositório e Instruções de Funcionamento
