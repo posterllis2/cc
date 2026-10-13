@@ -73,12 +73,12 @@ flowchart LR
 ### 3. Protótipo Simulado
 
 * **Tela Inicial**
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/4f902b6a-6bb3-4489-b537-9026af6b0214" />
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/d5cf6020-e7b9-44f8-b443-cc27f2a48b70" />
 
 * **Simulação de Pagamento**
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/5a79623c-5d5c-43e7-8740-2837e8afd7be" />
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/a4dbe6d9-1cb7-4670-92a4-ed4497b997ad" />
 
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/0147456e-0b11-4272-9dc3-e89f01f17f9d" />
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/d1f16ba1-a97d-47a5-a9a0-9c77df1da310" />
 
 ---
 
