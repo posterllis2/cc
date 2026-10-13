@@ -113,22 +113,39 @@ O projeto foi arquitetado para que cada tecnologia aplicada atue diretamente nos
 * **Contribuição:** A eficiência energética é garantida pelo *Smart Charging*. Em vez de sobrecarregar a rede ou precisar de cabos e transformadores superdimensionados (o que seria caro e ineficiente), o algoritmo divide dinamicamente a potência exata disponível (Rede + Solar) entre os veículos conectados. Isso garante que nenhum watt seja desperdiçado e que o limite contratado da distribuidora de energia nunca seja estourado, garantindo máxima eficiência com os recursos físicos disponíveis.
 ---
 
-## 📊 Resultados e Dados Funcionais Apresentados
-O protótipo simulado entrega, em tempo real, os seguintes resultados funcionais operacionais:
+## ⚙️ Dinâmica da Automação (Motor de Simulação)
 
-* **Smart Charging em Ação:** Se a capacidade somada de recarga dos carros exceder o limite do Hub (Grid 15kW + Solar Variável), o sistema restringe automaticamente a potência enviada (Ex: reduz de 7kW para 3.5kW por vaga), evitando multas na conta de luz comercial.
+Para atender ao conceito de **Automação** em Python, substituímos ações manuais de simulação por um **Loop de Eventos Assíncronos** (usando `tkinter.after`).
 
-* **Uso de Energia Limpa:** O sistema reconhece a "hora do dia" e simula a entrada de energia solar, diminuindo a dependência da rede local.
+- **Avanço do Tempo:** A cada 1,5 segundos da vida real, o sistema avança 15 minutos na simulação.
+- **Cálculo Solar:** A geração de energia fotovoltaica (kW) é calculada de forma estática **uma vez por hora** na virada do relógio (e não mais de forma volátil a cada recarga).
+- **Recarga Fluída:** Os veículos recebem frações de energia (kWh) de maneira ininterrupta em segundo plano, respeitando os limites da rede (Smart Charging) e acionando o limite máximo automaticamente caso a demanda supere o *Grid + Solar*.
 
-* **Módulo de Pagamento Funcional:** O operador calcula o custo real da recarga considerando Tarifas de Pico (acréscimo de 30% entre 18h e 21h) e efetua "baixa" via PIX ou Cartão.
+---
 
-* **Coleta de Dados:** O encerramento das vagas gera automaticamente o arquivo físico "relatorio_financeiro_[DATA].json" contendo ID da vaga, energia consumida, valor pago e forma de pagamento.
+## 📊 Resultados Reais da Simulação (Exemplo Prático)
 
-* **Variação da Matriz de Suprimento:** O usuário visualiza o relógio avançar e a geração solar subir e descer, alterando diretamente a potência máxima do hub em tempo real.
+Durante a execução da nossa aplicação, geramos o comportamento natural de uma estação e exportamos o resultado financeiro de faturamento. Abaixo está a comprovação gerada (extraída da exportação em `.json`), mostrando como os dados operam de ponta a ponta:
 
-* **Rateio de Potência (Gargalo Físico):** A simulação prova que conectar múltiplos VEs não causa colapso (Blackout local), mas sim uma desaceleração controlada da recarga, mantendo a operação segura e dentro da norma técnica.
-
-* **Métricas Financeiras Atreladas à Energia:** O sistema exporta faturas (.json) relacionando a quantidade exata de energia consumida (kWh) com o custo do horário da tomada, evidenciando o modelo de negócios viável de um eletroposto sustentável.
+```json
+[
+    {
+        "vaga": "1",
+        "energia_kwh": 37.25,
+        "total_rs": 29.8,
+        "pagamento": "PIX",
+        "tarifa_aplicada": 0.8,
+        "data": "2026-10-13 14:15:22"
+    },
+    {
+        "vaga": "2",
+        "energia_kwh": 40.0,
+        "total_rs": 41.6,
+        "pagamento": "Cartão de Crédito",
+        "tarifa_aplicada": 1.04,
+        "data": "2026-10-13 19:30:10"
+    }
+]
 --- 
 
 ## 🧠 Conexão com os Conteúdos da Disciplina
@@ -152,10 +169,8 @@ Este projeto engloba de forma prática os pilares da disciplina de Pensamento Co
 ### Como Executar a Aplicação:
 1. Certifique-se de ter o Python 3.8 ou superior instalado em sua máquina.
 
-2. Clone o repositório ou faça o download do arquivo app_gui.py.
+2. Clone o repositório ou faça o download do arquivo codigo.py.
 
 3. Abra o terminal na pasta onde o arquivo está salvo.
 
-4. Execute o comando: python codigo.py
-
-5. Interaja com a interface gráfica, crie sessões, teste o módulo de pagamento e verifique o arquivo .json gerado ao final das operações na mesma pasta do executável.
+4. Interaja com a interface gráfica, crie sessões, teste o módulo de pagamento e verifique o arquivo .json gerado ao final das operações na mesma pasta do executável.
