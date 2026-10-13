@@ -4,9 +4,7 @@ import json
 import random
 from datetime import datetime
 
-# ==========================================
 # CONFIGURAÇÕES DA ESTAÇÃO E CORES
-# ==========================================
 POTENCIA_NOMINAL_VAGA = 7.0
 LIMITE_POTENCIA_HUB = 15.0
 TARIFA_BASE_COMERCIAL = 0.80
@@ -142,9 +140,7 @@ class ReechargeGUI:
                                relief=tk.FLAT)
         self.txt_log.pack(fill=tk.BOTH, expand=True, padx=10, pady=(0, 10))
 
-    # ==========================================
     # LÓGICA DE AUTOMAÇÃO E TEMPO
-    # ==========================================
     def toggle_automacao(self):
         self.automacao_ativa = not self.automacao_ativa
         if self.automacao_ativa:
@@ -202,9 +198,7 @@ class ReechargeGUI:
                     self.simular_log_ocpp("MeterValues",
                                           {"connectorId": int(vid), "value": f"{dados['energia_recarregada']:.2f} kWh"})
 
-    # ==========================================
     # LOGS E INTERFACE
-    # ==========================================
     def log_mensagem(self, msg, cor="#00FF00"):
         self.txt_log.config(state=tk.NORMAL)
         self.txt_log.insert(tk.END, f"[{datetime.now().strftime('%H:%M:%S')}] {msg}\n")
@@ -238,9 +232,7 @@ class ReechargeGUI:
                 card["status"].config(text="LIVRE\n-\n-", fg=TEXT_MUTED)
                 card["frame"].config(highlightbackground=ACCENT_COLOR)
 
-    # ==========================================
     # AÇÕES DOS BOTÕES E PAGAMENTO
-    # ==========================================
     def popup_conectar_veiculo(self):
         if len(self.vagas) >= 4:
             messagebox.showwarning("Aviso", "Estação Lotada! Nenhuma vaga disponível.")
