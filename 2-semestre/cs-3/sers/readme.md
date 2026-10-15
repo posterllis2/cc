@@ -11,24 +11,6 @@ O **REECHARGE** é uma plataforma simulada de gerenciamento de estações de rec
 
 ---
 
-## 🎯 Alinhamento ao Desafio GoodWe e Resolução de Pontos-Chave
-
-O desafio da GoodWe aborda a ausência de mecanismos integrados em eletropostos comerciais para gerenciar a potência, registrar o ciclo da sessão e aplicar políticas de tarifação. Nossa plataforma atua como o "cérebro" do eletroposto, orquestrando esses exatos pontos:
-
-1. **Gestão de Potência (Smart Charging contra Multas):**
-   * *O Problema:* Picos de demanda geram multas contratuais pesadas junto às concessionárias de energia.
-   * *A Solução:* O sistema monitora a potência limite da rede somada à geração solar instantânea. Se a demanda dos veículos ultrapassar esse limite, a automação aplica um *Rate-Limiting* (corte proporcional de potência entregue), protegendo a rede do estabelecimento de sobrecargas e multas tarifárias.
-
-2. **Registro do Ciclo da Sessão (Automação OCPP & MODBUS):**
-   * *O Problema:* Falta de rastreabilidade física e de software das recargas.
-   * *A Solução:* A plataforma simula a leitura de sensores de inversores solares via protocolo MODBUS e orquestra as trocas de mensagens via protocolo OCPP 1.6J (*StartTransaction, MeterValues, StopTransaction*), garantindo que cada kWh injetado e consumido seja auditado e registrado.
-
-3. **Políticas de Tarifação e Pagamento Dinâmico:**
-   * *O Problema:* Modelos de cobrança estáticos não acompanham as flutuações de custo da energia elétrica (horário de pico).
-   * *A Solução:* O motor de tarifação monitora o relógio e aplica um conceito de *Demand Response*, adicionando um prêmio (acréscimo de 30%) em horários de pico (18h-21h). O módulo de pagamento integrado no sistema finaliza a operação simulando gateways de PIX e Cartão de Crédito.
-   * 
----
-
 ## 🧩 Esquema Detalhado de Integração dos Componentes
 
 ### 1. Diagrama de Blocos da Arquitetura (Hardware & Software)
@@ -91,110 +73,89 @@ flowchart LR
 ### 3. Protótipo Simulado
 
 * **Tela Inicial**
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/d5cf6020-e7b9-44f8-b443-cc27f2a48b70" />
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/4f902b6a-6bb3-4489-b537-9026af6b0214" />
 
 * **Simulação de Pagamento**
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/a4dbe6d9-1cb7-4670-92a4-ed4497b997ad" />
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/5a79623c-5d5c-43e7-8740-2837e8afd7be" />
 
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/d1f16ba1-a97d-47a5-a9a0-9c77df1da310" />
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/0147456e-0b11-4272-9dc3-e89f01f17f9d" />
 
 ---
 
 ## 🛠 Justificativa Técnica das Escolhas
-Para atender aos requisitos de automação e integração técnica, adotamos as seguintes tecnologias:
+Para atender aos requisitos de automação e integração técnica de forma otimizada e acessível, adotamos as seguintes tecnologias:
 
 * **Linguagem (Python):** Escolhida por sua versatilidade e facilidade na manipulação de estruturas de dados e criação de lógicas complexas de automação.
 
 * **Interface Gráfica (Tkinter):** Utilizamos uma biblioteca nativa do Python. Isso justifica-se para garantir que o software rode em qualquer ambiente sem necessidade de instalações complexas via pip, mantendo o código leve e focado no Pensamento Computacional.
 
-* **Protocolos e Sensores Abstraídos:** 
-  * **OCPP 1.6J:** O sistema simula mensagens desse protocolo aberto, pois é o padrão global adotado por fabricantes como a GoodWe para comunicação V2G (Vehicle-to-Grid) e infraestrutura.
-  * **MODBUS / Sensores de Irradiação:** A captação de energia solar é simulada espelhando o comportamento de sensores de irradiação solar lidos por inversores híbridos via protocolo industrial MODBUS.
+* **Comunicação (Padrão OCPP 1.6J):** O sistema simula mensagens desse protocolo aberto, pois é o padrão global adotado pela indústria (vendors como a GoodWe). Isso torna a lógica de negócio do software compatível com a realidade do mercado.
 
 * **Armazenamento de Dados (JSON):** A persistência de dados de faturamento no formato JSON é o formato universal de troca de informações moderno, facilitando integrações futuras com APIs, bancos de dados NoSQL e Web Dashboards.
 
+* **Design Visual (Preto e Vermelho):** Adotado para conferir um aspecto profissional, tecnológico e de fácil leitura (Dark Mode).
 ---
 
-## 🌱 Avaliação Crítica: Sustentabilidade, Inovação e Eficiência
+## 🌱 Contribuição para Sustentabilidade, Automação Inteligente e Eficiência Energética
 
-### 1. Sustentabilidade e Mitigação Ambiental
-* **Avaliação:** O projeto transforma um eletroposto em um consumidor ativo (prosumer). Ao calcular a geração solar a cada hora e somá-la à disponibilidade da rede, maximizamos a injeção de energia renovável na frota. Isso reduz drasticamente as emissões do Escopo 2 (emissões indiretas pelo consumo de eletricidade), desonerando usinas não renováveis.
+O projeto foi arquitetado para que cada tecnologia aplicada atue diretamente nos três pilares exigidos para a infraestrutura moderna de cidades inteligentes:
 
-### 2. Inovação: O Eletroposto como Microrede (Microgrid)
-* **Avaliação:** A verdadeira inovação é tratar o estacionamento como uma microrede inteligente. O motor do sistema toma decisões autônomas, gerando alertas sobre a disponibilidade solar ("Aproveite o excedente de sol para recargas"). Isso transforma hardware convencional em dispositivos de infraestrutura de borda (Grid Edge).
+### 1. Sustentabilidade (Integração Fotovoltaica Simulada)
+* **Tecnologia:** Lógica de injeção de energia renovável baseada em horário (Simulação de Inversores Híbridos).
+* **Contribuição:** O sistema reduz a dependência de combustíveis fósseis e da rede elétrica convencional ao priorizar a energia solar. Ao detectar alta geração (ex: entre 10h e 14h), a plataforma orienta o consumo de energia limpa, reduzindo a pegada de carbono da operação do hub de recarga.
 
-### 3. Eficiência Energética (Smart Charging)
-* **Avaliação:** O sistema prova que não é necessário redimensionar cabos e transformadores (o que gera alto custo financeiro e material) para instalar múltiplos carregadores. O algoritmo de Load Balancing otimiza a infraestrutura elétrica existente até o limite máximo de sua eficiência, cortando o desperdício e evitando perdas por efeito Joule decorrentes de sobrecargas.
+### 2. Automação Inteligente (Motor Python e IA Preditiva)
+* **Tecnologia:** Algoritmos em Python e Processamento de Regras Preditivas.
+* **Contribuição:** O sistema elimina a necessidade de microgerenciamento humano. A automação inteligente monitora em tempo real a ocupação das vagas, a tarifa do momento (Demand Response) e a geração solar. Além disso, o Agente de IA toma decisões de negócio de forma autônoma, sugerindo ao operador aplicar tarifas promocionais ou alertando sobre sobrecargas iminentes antes que elas afetem a infraestrutura.
 
+### 3. Eficiência Energética (Smart Charging e OCPP 1.6J)
+* **Tecnologia:** Algoritmo de *Load Balancing* (Balanceamento de Carga) e mensagens do padrão OCPP.
+* **Contribuição:** A eficiência energética é garantida pelo *Smart Charging*. Em vez de sobrecarregar a rede ou precisar de cabos e transformadores superdimensionados (o que seria caro e ineficiente), o algoritmo divide dinamicamente a potência exata disponível (Rede + Solar) entre os veículos conectados. Isso garante que nenhum watt seja desperdiçado e que o limite contratado da distribuidora de energia nunca seja estourado, garantindo máxima eficiência com os recursos físicos disponíveis.
 ---
 
-## ⚙️ Dinâmica da Automação (Motor de Simulação)
+## 📊 Resultados e Dados Funcionais Apresentados
+O protótipo simulado entrega, em tempo real, os seguintes resultados funcionais operacionais:
 
-A cada 1,5 segundos da vida real, o sistema avança 15 minutos na simulação.
+* **Smart Charging em Ação:** Se a capacidade somada de recarga dos carros exceder o limite do Hub (Grid 15kW + Solar Variável), o sistema restringe automaticamente a potência enviada (Ex: reduz de 7kW para 3.5kW por vaga), evitando multas na conta de luz comercial.
 
-- **Avanço do Tempo:** A cada 1,5 segundos da vida real, o sistema avança 15 minutos na simulação.
-- **Cálculo Solar:** A geração fotovoltaica é reavaliada apenas uma vez por hora na virada do relógio simulado, trazendo fidelidade ao comportamento do sol.
-- **Recarga Fluída:** Os veículos recebem frações de energia (kWh) de forma contínua em background, acionando limitadores automaticamente se a demanda superar o Grid + Solar.
+* **Uso de Energia Limpa:** O sistema reconhece a "hora do dia" e simula a entrada de energia solar, diminuindo a dependência da rede local.
 
----
+* **Módulo de Pagamento Funcional:** O operador calcula o custo real da recarga considerando Tarifas de Pico (acréscimo de 30% entre 18h e 21h) e efetua "baixa" via PIX ou Cartão.
 
-## 📊 Resultados Obtidos
+* **Coleta de Dados:** O encerramento das vagas gera automaticamente o arquivo físico "relatorio_financeiro_[DATA].json" contendo ID da vaga, energia consumida, valor pago e forma de pagamento.
 
-### 1. Resultados Qualitativos
-* **Interface Corporativa:** A adoção do padrão Dark Mode permitiu visualizar e operar as regras de negócio em um ambiente consolidado e livre de poluição visual.
-* **Alertas em Linguagem Natural:** O motor de IA traduz os dados brutos de energia em informações acionáveis e humanizadas para o operador (ex: "Aproveite o pico de sol").
-* **Fluidez Sistêmica:** A substituição de atualizações baseadas em cliques por uma automação guiada pelo tempo real aproximou o projeto de um software IoT comercial.
-* 
-### 1. Resultados Quantitativos
-O sistema loga e exporta as transações para um arquivo .json gerado ao final. Abaixo a demonstração de ponta a ponta gerada pela automação:
+* **Variação da Matriz de Suprimento:** O usuário visualiza o relógio avançar e a geração solar subir e descer, alterando diretamente a potência máxima do hub em tempo real.
 
-```json
-[
-    {
-        "vaga": "1",
-        "energia_kwh": 37.25,
-        "total_rs": 29.8,
-        "pagamento": "PIX",
-        "tarifa_aplicada": 0.8,
-        "data": "2026-10-13 14:15:22"
-    },
-    {
-        "vaga": "2",
-        "energia_kwh": 40.0,
-        "total_rs": 41.6,
-        "pagamento": "Cartão de Crédito",
-        "tarifa_aplicada": 1.04,
-        "data": "2026-10-13 19:30:10"
-    }
-]
-```
+* **Rateio de Potência (Gargalo Físico):** A simulação prova que conectar múltiplos VEs não causa colapso (Blackout local), mas sim uma desaceleração controlada da recarga, mantendo a operação segura e dentro da norma técnica.
 
-> Nota-se claramente a ação das regras de negócio: A Vaga 2 conectou no horário de pico noturno e sofreu o repasse do custo da rede estressada (R$ 1,04/kWh), enquanto a Vaga 1 usufruiu da geração solar e pagou a taxa comum (R$ 0,80/kWh). 
+* **Métricas Financeiras Atreladas à Energia:** O sistema exporta faturas (.json) relacionando a quantidade exata de energia consumida (kWh) com o custo do horário da tomada, evidenciando o modelo de negócios viável de um eletroposto sustentável.
 --- 
 
 ## 🧠 Conexão com os Conteúdos da Disciplina
-Este projeto implementa na prática os pilares estudados na disciplina:
+Este projeto engloba de forma prática os pilares da disciplina de Pensamento Computacional e Automação com Python:
 
-* **Integração Fotovoltaica e Eletromobilidade::** Demonstra como a geração distribuída (painéis solares) pode ser acoplada a cargas de alta potência (VEs) de forma sistêmica, aproveitando a curva de pato (duck curve) a favor do consumo local.
+* **Decomposição:** O problema de gestão de frota foi quebrado em módulos menores (Cálculo de Tarifa, IA Preditiva, Interface Visual, Simulador OCPP).
 
-* **Gerenciamento do Lado da Demanda (Demand Side Management - DSM):** Uso de tarifação dinâmica (Time-of-Use) para deslocar o consumo de horários críticos para horários de alta geração solar.
+* **Reconhecimento de Padrões e Algoritmos:** A lógica de Smart Charging é um algoritmo clássico de balanceamento de carga, distribuindo recursos (potência) com base em variáveis dinâmicas (carros ativos vs energia total).
 
-* **Smart Grid e V1G:** O controle unidirecional inteligente (V1G) modula a taxa de carregamento dos veículos em tempo real, mantendo a estabilidade da rede local sem a necessidade imediata de baterias estacionárias caras.
+* **Automação:** O sistema automatiza o faturamento baseado em horário comercial e a aplicação de energia solar na equação de disponibilidade da rede.
 
-* **Eficiência e Dimensionamento:** Aplicação de algoritmos para evitar o superdimensionamento da rede elétrica, extraindo o máximo de kW úteis dos recursos já
+* **Programação Orientada a Objetos (POO):** O código GUI foi encapsulado na classe ReechargeGUI, gerindo os estados das variáveis globais do hub de recarga de maneira limpa.
 ---
 
 ## ⚙️ Estrutura do Repositório e Instruções de Funcionamento
 ### Arquivos no Repositório:
-* codigo.py: Código-fonte principal com a Interface Gráfica e automações.
+* codigo: Código-fonte principal com a Interface Gráfica e regras de negócio.
 
-* readme.md: Documentação técnica do projeto.
+* readme.md: Documentação atual do projeto.
 
 ### Como Executar a Aplicação:
 1. Certifique-se de ter o Python 3.8 ou superior instalado em sua máquina.
 
-2. Clone o repositório ou faça o download do arquivo codigo.py.
+2. Clone o repositório ou faça o download do arquivo app_gui.py.
 
-3. Abra o terminal na pasta correspondente e execute codigo.py.
+3. Abra o terminal na pasta onde o arquivo está salvo.
 
-4. Clique em "Iniciar Automação" na interface, crie sessões, realize simulações de pagamento e confira o relatório .json persistido no seu diretório
+4. Execute o comando: python codigo.py
+
+5. Interaja com a interface gráfica, crie sessões, teste o módulo de pagamento e verifique o arquivo .json gerado ao final das operações na mesma pasta do executável.
